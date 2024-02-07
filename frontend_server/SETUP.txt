@@ -1,0 +1,6 @@
+
+Frontend server to proxify backend with nginx
+
+1. get VPS with debian. 32 or 64, 2 gb RAM at leastdebian 64, 8 gb RAM at least, 20 gb HDD at least (SSD will be better)
+2. change x.x.x.x to backend ip in setup_client_vps.sh
+3. upload script to the VPS and execute

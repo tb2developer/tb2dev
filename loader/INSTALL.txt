@@ -1,0 +1,43 @@
+
+
+android loader installation guide
+20/11/17
+
+Server requirements:
+- OS debian 7.0 or newer
+- RAM 2 Gb or more
+- apache 2
+- php 5
+- mysql 
+
+1. bot
+Open folder 'bot' in Android studio 2.0 or higher
+Set correct server ip or domain in bot/app/src/main/java/task/loader/Constants.java
+Build apk
+
+2. panel
+Upload panel to the server
+Setup apache with panel/apache_loader.conf
+Create mysql database named 'loader' and import panel/db_loader.sql
+Set mysql access data in panel/db.php
+Copy  panel/video/aapt/libc++.so to /usr/lib/
+
+Setup basic auth in panel/video/.htaccess:
+	htpasswd -cb /var/data/loader.passwd USER PASSWORD
+
+make panel/tmp writeable
+
+3. usage
+- install loader on the phone
+- open panel with default login 'admin' and password '123123'
+- bot should appear in 'Bots' section
+- upload target apk (that should be installed by loader) to any host 
+- create new task in Loader panel, set direct url to apk
+- set number of attemps - how much times loader will propose user to install the target apk
+- make task 'active'
+
+- make sure loader is installed on your device, disable screen
+- enable screen again - loader will propose you to install the target apk
+- it will propose user to install every 20 seconds once it will be done
+
+Optionally you can show landing page first, set url of the landing in the task settings

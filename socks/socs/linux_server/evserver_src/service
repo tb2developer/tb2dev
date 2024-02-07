@@ -1,0 +1,23 @@
+#!/bin/bash
+
+case $1 in
+	start)
+		./evserver > /tmp/evserver-access.log 2>/tmp/evserver-error.log &
+		pid=$!
+		echo $pid > /tmp/evserver.pid
+		echo "evserver started"
+		;;
+	stop)
+		[ -f /tmp/evserver.pid ] && kill -2 `cat /tmp/evserver.pid` || echo "evserver is not running"
+		;;
+	status)
+		if [[ -f /tmp/evserver.pid ]]
+		then
+			[ -f /proc/`cat /tmp/evserver.pid`/cmdline ] && echo evserver is running || echo evserver is stopped
+		fi
+		;;
+	*)
+		echo "USAGE: $0 [start stop]"
+		;;
+
+esac

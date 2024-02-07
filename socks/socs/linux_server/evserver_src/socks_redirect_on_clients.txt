@@ -1,0 +1,23 @@
+front rules one time setup
+
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 1024:1442 -j DNAT --to BACKEND_IP:1024-1442
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 1444:32960 -j DNAT --to BACKEND_IP:1444-32960
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 32962:35579 -j DNAT --to BACKEND_IP:32962-35579
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 35581:45983 -j DNAT --to BACKEND_IP:35581-45983
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 45985:52172 -j DNAT --to BACKEND_IP:45985-52172
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 52174:60599 -j DNAT --to BACKEND_IP:52174-60599
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 60601:65535 -j DNAT --to BACKEND_IP:60601-65535
+
+BEFORE OPENING ANY PORTS ON FRONT CHECK IPTABLES RULES!!!!!
+
+
+clients rule
+
+sysctl -w net.ipv4.ip_forward=1
+iptables -t nat -I PREROUTING -p tcp -m tcp --dport 5555 -j DNAT --to CUSTOMER_IP:5555
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE 
+
+iptables -t nat -I PREROUTING -p tcp -i eth0 -m tcp --dport 1024:65535 -j DNAT --to CUSTOMER_IP:1024-65535
+
+
+

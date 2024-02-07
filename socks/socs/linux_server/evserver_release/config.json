@@ -1,0 +1,7 @@
+{
+	"threads": 100,
+    "port": 5555,
+    "mysql_user": "root",
+    "mysql_password": "gPI9SZ03zuVT",
+    "mysql_db": "general"
+}
